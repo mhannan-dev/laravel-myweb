@@ -17,6 +17,7 @@ class CreateHomesTable extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->longText('description');
+            $table->unsignedTinyInteger('status')->default(0)->comment('0=Draft, 1=Publish');
             $table->timestamps();
         });
     }

@@ -30,12 +30,13 @@ Route::group(['prefix' => 'admin'], function(){
   Route::get('/home-page-data-list', 'Backend\HomeController@index')->name('admin_home_page_data_list');
   Route::get('/home-page-data-add-form', 'Backend\HomeController@create')->name('admin_home_create');
   Route::post('/homepage-store', 'Backend\HomeController@store')->name('admin_home_store');
+  Route::post('/homepage-delete-data/{id}', 'Backend\HomeController@delete')->name('admin_home_delete_data');
 
   //Home Page Controller
 
   //About Page Controller
     Route::get('/all', 'Backend\AboutController@index')->name('about_data_list');
-    Route::get('/about', 'Backend\AboutController@create')->name('admin_about_create');
+    Route::get('/about-page-data-add-form', 'Backend\AboutController@create')->name('admin_about_create');
     Route::post('/store', 'Backend\AboutController@store')->name('admin_about_store');
 
 

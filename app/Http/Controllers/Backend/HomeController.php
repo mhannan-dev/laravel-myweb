@@ -47,15 +47,31 @@ class HomeController extends Controller
         $request->validate([
             'title'         => 'required|max:150',
             'description'     => 'required',
+            'status'     => 'required',
         ]);
 
         $home = new Home();
         $home->title = $request->title;
         $home->description = $request->description;
+        $home->status = $request->status;
+
         $home->save();
         //dd($home);
         session()->flash('success', 'Added successfully !!');
         return redirect()->route('admin_home_page_data_list');
+
+    }
+
+
+    public function delete($id)
+    {
+        $delete_query = Home::find($id);
+        if (!is_null($delete_query)) {
+            $delete_query->delete();
+        }
+
+        session()->flash('success', 'Data has deleted successfully !!');
+        return back();
 
     }
 

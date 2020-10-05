@@ -16,6 +16,7 @@
                                 <th>SL</th>
                                 <th>Title</th>
                                 <th>Description</th>
+                                <th>Status</th>
                                 <th>Action</th>
                                 <th>Start date</th>
 
@@ -26,6 +27,7 @@
                                 <th>SL</th>
                                 <th>Title</th>
                                 <th>Description</th>
+                                <th>Status</th>
                                 <th>Action</th>
                                 <th>Start date</th>
                             </tr>
@@ -38,8 +40,51 @@
                                 <td>{{ $home_data->title }}</td>
                                 <td>{{ $home_data->description }}</td>
                                 <td>
-                                    <span class="badge badge-success">Edit</span>
-                                    <span class="badge badge-danger">Delete</span>
+                                @if($home_data->status == 0)
+
+                                    <span class="badge badge-warning">Draft</span>
+                                @else
+                                     <span class="badge badge-success">Published</span>
+                                @endif
+
+                                </td>
+                                <td>
+                                    <a class="badge badge-success">
+                                        <i class="fa fa-edit" aria-hidden="true"></i></a>
+
+                                       <a href="#deleteModal{{ $home_data->id }}" data-toggle="modal" class="badge badge-danger">
+                                           <i class="fa fa-trash" aria-hidden="true"></i>
+                                       </a>
+
+                                    <!-- Delete Modal -->
+                                    <div class="modal fade" id="deleteModal{{ $home_data->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Are sure to delete?</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="{!! route('admin_home_delete_data', $home_data->id) !!}"  method="post">
+                                                        {{ csrf_field() }}
+                                                        <button type="submit" class="btn btn-danger">Permanent Delete</button>
+                                                    </form>
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Delete Modal -->
+
+
+
+
                                 </td>
                                 <td>{{ $home_data->created_at }}</td>
 

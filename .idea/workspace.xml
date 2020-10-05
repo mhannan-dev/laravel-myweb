@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2ba8b9a4-71d7-45bd-b668-ca5c4de4b070" name="Default Changelist" comment="" />
+    <list default="true" id="2ba8b9a4-71d7-45bd-b668-ca5c4de4b070" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Home.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Home.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_09_27_094235_create_homes_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_09_27_094235_create_homes_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_09_27_152141_create_abouts_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_09_27_152141_create_abouts_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/pages/home/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/pages/home/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/pages/home/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/pages/home/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
   </component>
@@ -17,6 +26,9 @@
         <option value="composer.json" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="PackageJsonUpdateNotifier">
     <dismissed value="$PROJECT_DIR$/package.json" />
@@ -112,6 +124,7 @@
     </include_path>
   </component>
   <component name="ProjectId" id="1i5w3eGBc35J343lrzWYKcCzq4R" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -137,7 +150,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1601210562404</updated>
-      <workItem from="1601210569307" duration="8837000" />
+      <workItem from="1601210569307" duration="9559000" />
+      <workItem from="1601718955592" duration="33000" />
+      <workItem from="1601904338220" duration="4162000" />
     </task>
     <servers />
   </component>
@@ -145,6 +160,10 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="420" y="118" key="FileChooserDialogImpl" timestamp="1601718990947">
+      <screen x="0" y="0" width="1280" height="728" />
+    </state>
+    <state x="420" y="118" key="FileChooserDialogImpl/0.0.1280.728@0.0.1280.728" timestamp="1601718990947" />
     <state x="0" y="0" key="FileDocumentManager.FileCacheConflict" timestamp="1601219293467">
       <screen x="0" y="0" width="1280" height="728" />
     </state>

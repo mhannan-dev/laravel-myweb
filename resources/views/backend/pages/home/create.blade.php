@@ -19,6 +19,14 @@
                                     <label for="description">Description</label>
                                     <textarea class="form-control" name="description" id="description" rows="3"></textarea>
                                 </div>
+                                <div class="form-group">
+                                    <label for="status">Status</label>
+                                    <select class="form-control" id="status" name="status">
+                                        <option value="1">Publish</option>
+                                        <option value="0">Draft</option>
+
+                                    </select>
+                                </div>
                                 <div class="form-group mt-4 mb-0">
                                     <button type="submit" class="btn btn-primary btn-block">Save</button>
                                 </div>
