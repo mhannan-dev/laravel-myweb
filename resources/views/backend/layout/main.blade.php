@@ -10,9 +10,14 @@
     <link href="{{URL('frontend/css/styles.css')}}" rel="stylesheet" />
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
+    <script src="{{ URL::asset('assets/ckeditor/ckeditor.js')}}" type="text/javascript"></script>
+
+
 </head>
 <body class="sb-nav-fixed">
+
 @include('backend.partials.navbar')
+
 <div id="layoutSidenav">
 <div id="layoutSidenav_nav">
 @include('backend.partials.sidebar')

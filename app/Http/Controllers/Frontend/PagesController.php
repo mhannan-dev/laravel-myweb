@@ -2,13 +2,19 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\Contact;
+use App\Models\Home;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class PagesController extends Controller
 {
     public function index(){
-      return view('frontend/pages/index');
+      $home_content = DB::select('SELECT * FROM contacts WHERE status = 1 ORDER BY fullname DESC');
+      //dd($home_content);
+
+      return view('frontend/pages/index', compact('home_content'));
     }
 
     public function about(){
@@ -29,5 +35,33 @@ class PagesController extends Controller
 
     public function contact(){
       return view('frontend/pages/contact');
+    }
+
+    public function contact_mail(Request $request){
+        $request->validate([
+            'message'         => 'required',
+            'fullname'     => 'required',
+            'email'     => 'required',
+            'subject' => 'required|max:150'
+        ],
+        [
+                'message.required'  => 'Please fillup a message',
+                'fullname.required'  => 'Please fillup a title',
+                'email.required'  => 'Please fillup email',
+                'subject' => 'Please enter subject'
+        ]);
+
+        $msg = new Contact();
+        $msg->message = $request->message;
+        $msg->fullname = $request->fullname;
+        $msg->status = 0;
+        $msg->email = $request->email;
+        $msg->subject = $request->subject;
+
+        $msg->save();
+        //dd($msg);
+
+        toast('Message sent successfully !!','success');
+        return view('frontend/pages/contact');
     }
 }

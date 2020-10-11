@@ -14,8 +14,8 @@
             </a>
             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                 <nav class="sb-sidenav-menu-nested nav">
-                    <a class="nav-link" href="{{ route('admin_home_create')}}">Add</a>
-                    <a class="nav-link" href="{{ route('admin_home_page_data_list')}}">List</a>
+                    <a class="nav-link" href="{{ route('admin.home.create')}}">Add</a>
+                    <a class="nav-link" href="{{ route('admin.home.page')}}">List</a>
 
                 </nav>
             </div>
@@ -27,11 +27,57 @@
 
             <div class="collapse" id="collapsePages" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                 <nav class="sb-sidenav-menu-nested nav">
-                    <a class="nav-link" href="{{ route('admin_about_create') }}">Add</a>
+                    <a class="nav-link" href="{{ route('admin.about.create') }}">Add</a>
+                    <a class="nav-link" href="{{ route('admin.about.page') }}">List</a>
 
                 </nav>
             </div>
 
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseService" aria-expanded="false" aria-controls="collapsePages">
+                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                Manage Services
+                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+            </a>
+            <div class="collapse" id="collapseService" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                <nav class="sb-sidenav-menu-nested nav">
+                    <a class="nav-link" href="{{ route('admin.service.create') }}">Add</a>
+                    <a class="nav-link" href="{{ route('admin.service.page') }}">List</a>
+
+                </nav>
+            </div>
+
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInbox" aria-expanded="false" aria-controls="collapsePages">
+                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                Inbox
+                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+            </a>
+            <div class="collapse" id="collapseInbox" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                <nav class="sb-sidenav-menu-nested nav">
+                    <a class="nav-link" href="{{ route('admin.message.page') }}">Unseen Message &nbsp;
+                        <span class="badge badge-pill badge-danger">
+                           {{  $contact->where('status', 0)->count() }}
+                        </span>
+                    </a>
+
+                   <a class="nav-link" href="{{ route('admin.message.seen') }}">Seen Message &nbsp;
+
+                       <span class="badge badge-pill badge-warning">
+                           {{  $contact->where('status', 1)->count() }}
+                        </span>
+                   </a>
+
+{{--                    @if($contact->where('status', 0))--}}
+{{--                        <a class="nav-link" href="{{ route('admin.message.page') }}">New &nbsp;--}}
+{{--                        <span class="badge badge-pill badge-danger">--}}
+{{--                           {{  $contact->where('status', 0)->count() }}--}}
+{{--                        </span>--}}
+{{--                        </a>--}}
+{{--                    @elseif($contact->where('status', 1))--}}
+{{--                        <a class="nav-link" href="{{ route('admin.service.page') }}">Seen Message</a>--}}
+{{--                    @endif--}}
+
+                </nav>
+            </div>
 
 
         </div>

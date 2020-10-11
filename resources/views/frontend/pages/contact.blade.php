@@ -26,13 +26,14 @@
           <!-- ================ contact section start ================= -->
           <section class="contact-section">
               <div class="container">
-                
+
                   <div class="row">
                       <div class="col-12">
                           <h2 class="contact-title">Get in Touch</h2>
                       </div>
                       <div class="col-lg-8">
-                          <form class="form-contact contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
+                          <form class="form-contact contact_form" action="{{ route('frontend.contact_mail') }}" method="post">
+                              @csrf
                               <div class="row">
                                   <div class="col-12">
                                       <div class="form-group">
@@ -41,7 +42,7 @@
                                   </div>
                                   <div class="col-sm-6">
                                       <div class="form-group">
-                                          <input class="form-control valid" name="name" id="name" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'" placeholder="Enter your name">
+                                          <input class="form-control valid" name="fullname" id="fullname" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your fullname'" placeholder="Enter your name">
                                       </div>
                                   </div>
                                   <div class="col-sm-6">

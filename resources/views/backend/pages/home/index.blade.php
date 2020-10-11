@@ -36,7 +36,7 @@
 
                             @foreach ($data as $home_data)
                             <tr>
-                                <td>1</td>
+                                <td>{{ $loop->iteration }}</td>
                                 <td>{{ $home_data->title }}</td>
                                 <td>{{ $home_data->description }}</td>
                                 <td>
@@ -49,8 +49,9 @@
 
                                 </td>
                                 <td>
-                                    <a class="badge badge-success">
-                                        <i class="fa fa-edit" aria-hidden="true"></i></a>
+                                    <a href="{{ route('admin.home.edit', $home_data->id) }}" class="badge badge-success">
+                                        <i class="fa fa-edit" aria-hidden="true"></i>
+                                    </a>
 
                                        <a href="#deleteModal{{ $home_data->id }}" data-toggle="modal" class="badge badge-danger">
                                            <i class="fa fa-trash" aria-hidden="true"></i>
@@ -67,7 +68,7 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form action="{!! route('admin_home_delete_data', $home_data->id) !!}"  method="post">
+                                                    <form action="{!! route('admin.home.delete', $home_data->id) !!}"  method="post">
                                                         {{ csrf_field() }}
                                                         <button type="submit" class="btn btn-danger">Permanent Delete</button>
                                                     </form>

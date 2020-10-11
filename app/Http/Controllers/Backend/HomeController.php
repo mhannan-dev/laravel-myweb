@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers\Backend;
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Controllers\Controller;
 use Validator;
 use App\Models\Home;
@@ -48,6 +49,11 @@ class HomeController extends Controller
             'title'         => 'required|max:150',
             'description'     => 'required',
             'status'     => 'required',
+        ],
+        [
+            'name.required'  => 'Please fillup a title',
+            'description.required'  => 'Please fillup a description',
+            'status.required'  => 'Please select status',
         ]);
 
         $home = new Home();
@@ -57,8 +63,9 @@ class HomeController extends Controller
 
         $home->save();
         //dd($home);
-        session()->flash('success', 'Added successfully !!');
-        return redirect()->route('admin_home_page_data_list');
+        //session()->flash('success', 'Added successfully !!');
+        toast('Added successfully !!','success');
+        return redirect()->route('admin.home.page');
 
     }
 
@@ -70,8 +77,44 @@ class HomeController extends Controller
             $delete_query->delete();
         }
 
-        session()->flash('success', 'Data has deleted successfully !!');
+        //session()->flash('success', 'Data has deleted successfully !!');
+        toast('Data has deleted successfully !!','success');
         return back();
+
+    }
+
+    public function edit($id)
+    {
+        $data_list = Home::find($id);
+        if (!is_null($data_list)) {
+
+            return view('backend.pages.home.edit', compact('data_list'));
+        }else {
+
+            return redirect()->route('admin.home.page');
+        }
+    }
+
+
+    public function update(Request $request, $id)
+    {
+
+        $request->validate([
+            'title'         => 'required|max:150',
+            'description'     => 'required',
+            'status'     => 'required',
+        ]);
+
+        $data_list = Home::find($id);
+        $data_list->title = $request->title;
+        $data_list->description = $request->description;
+        $data_list->status = $request->status;
+
+        $data_list->save();
+        //dd($data_list);
+
+        toast('Data has updated successfully !!','success');
+        return redirect()->route('admin.home.page',compact('data_list'));
 
     }
 

@@ -6,22 +6,24 @@
                 <div class="col-lg-12">
                     <div class="card shadow-lg border-0 rounded-lg mt-5">
                         <div class="card-header">
-                            <h3 class="text-center font-weight-light my-4">Add Info</h3>
+                            <h3 class="text-center font-weight-light my-4">Add Home Information</h3>
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('admin_home_store') }}" method="post">
+                            <form action="{{ route('admin.home.store') }}" method="post">
                                 @csrf
+                                @include('backend.partials.messages')
                                 <div class="form-group">
                                     <label class="small mb-1" for="title">Title</label>
-                                    <input class="form-control py-4" id="title" name="title" type="text" placeholder="Enter title" />
+                                    <input class="form-control py-4" id="title" name="title" type="text" placeholder="Enter title" required />
                                 </div>
                                 <div class="form-group">
                                     <label for="description">Description</label>
-                                    <textarea class="form-control" name="description" id="description" rows="3"></textarea>
+                                    <textarea class="form-control" name="description" id="description" rows="3" required></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="status">Status</label>
-                                    <select class="form-control" id="status" name="status">
+                                    <select class="form-control" id="status" name="status" required>
+                                        <option value="">Please select status</option>
                                         <option value="1">Publish</option>
                                         <option value="0">Draft</option>
 

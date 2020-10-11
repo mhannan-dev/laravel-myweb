@@ -108,6 +108,6 @@
 		<!-- Jquery Plugins, main Jquery -->
         <script src="{{ URL::asset('assets/js/plugins.js')}}"></script>
         <script src="{{ URL::asset('assets/js/main.js')}}"></script>
-
+    @include('sweetalert::alert')
     </body>
 </html>
