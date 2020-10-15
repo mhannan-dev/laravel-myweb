@@ -6,7 +6,7 @@
                 @include('backend.partials.messages')
                 <div class="card-header">
                     <i class="fas fa-table mr-1"></i>
-                    Unseen Message Box
+                    Service Data
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -14,49 +14,55 @@
                             <thead>
                             <tr>
                                 <th>SL</th>
-                                <th>Full Name</th>
-
-                                <th>Email</th>
-                                <th>Subject</th>
-                                <th>Date</th>
-                                <th>Actions</th>
+                                <th>Icon</th>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                                <th>Start date</th>
 
                             </tr>
                             </thead>
                             <tfoot>
                             <tr>
                                 <th>SL</th>
-                                <th>Full Name</th>
-
-                                <th>Email</th>
-                                <th>Subject</th>
-                                <th>Date</th>
-                                <th>Actions</th>
-
+                                <th>Icon</th>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                                <th>Start date</th>
                             </tr>
                             </tfoot>
                             <tbody>
 
-                            @foreach ($data as $msg_data)
+                            @foreach ($data as $service_data)
 
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $msg_data->fullname }}</td>
-
-
-                                <td>{{ $msg_data->email }}</td>
-                                <td>{{ $msg_data->subject }}</td>
+                                <td>{{ $service_data->icon }}</td>
+                                <td>{{ $service_data->title }}</td>
+                                <td>{{ $service_data->description }}</td>
                                 <td>
-                                    <a href="{{ route('admin.message.view', $msg_data->id) }}" class="badge badge-success">
-                                        <i class="fa fa-eye" aria-hidden="true"></i>
+                                @if($service_data->status == 0)
+
+                                    <span class="badge badge-warning">Draft</span>
+                                @else
+                                     <span class="badge badge-success">Published</span>
+                                @endif
+
+                                </td>
+                                <td>
+                                    <a href="{{ route('admin.service.edit', $service_data->id) }}" class="badge badge-success">
+                                        <i class="fa fa-edit" aria-hidden="true"></i>
                                     </a>
 
-                                       <a href="#deleteModal{{ $msg_data->id }}" data-toggle="modal" class="badge badge-danger">
+                                       <a href="#deleteModal{{ $service_data->id }}" data-toggle="modal" class="badge badge-danger">
                                            <i class="fa fa-trash" aria-hidden="true"></i>
                                        </a>
 
                                     <!-- Delete Modal -->
-                                    <div class="modal fade" id="deleteModal{{ $msg_data->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="deleteModal{{ $service_data->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -66,7 +72,7 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form action="{!! route('admin.about.delete', $msg_data->id) !!}"  method="post">
+                                                    <form action="{!! route('admin.service.delete', $service_data->id) !!}"  method="post">
                                                         {{ csrf_field() }}
                                                         <button type="submit" class="btn btn-danger">Permanent Delete</button>
                                                     </form>
@@ -80,7 +86,7 @@
                                     </div>
                                     <!-- Delete Modal -->
                                 </td>
-                                <td>{{ $msg_data->created_at }}</td>
+                                <td>{{ $service_data->created_at }}</td>
 
                             </tr>
                             @endforeach

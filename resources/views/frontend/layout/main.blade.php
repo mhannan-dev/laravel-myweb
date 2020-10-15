@@ -21,6 +21,7 @@
             <link rel="stylesheet" href="{{ URL::asset('assets/css/slick.css')}}">
             <link rel="stylesheet" href="{{ URL::asset('assets/css/nice-select.css')}}">
             <link rel="stylesheet" href="{{ URL::asset('assets/css/style.css')}}">
+            <link rel="stylesheet" href="{{ URL::asset('frontend/css/custom.css')}}">
    </head>
 
    <body>
@@ -108,6 +109,9 @@
 		<!-- Jquery Plugins, main Jquery -->
         <script src="{{ URL::asset('assets/js/plugins.js')}}"></script>
         <script src="{{ URL::asset('assets/js/main.js')}}"></script>
+        <script src="{{ URL::asset('frontend/js/isotop.js')}}"></script>
+        <script src="{{ URL::asset('frontend/js/custom.js')}}"></script>
+
     @include('sweetalert::alert')
     </body>
 </html>

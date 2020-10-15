@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 class PagesController extends Controller
 {
     public function index(){
-      $home_content = DB::select('SELECT * FROM contacts WHERE status = 1 ORDER BY fullname DESC');
+      $home_content = DB::select('SELECT * FROM homes WHERE status = 1 ORDER BY title DESC');
       //dd($home_content);
 
       return view('frontend/pages/index', compact('home_content'));

@@ -57,11 +57,25 @@ Route::group(['prefix' => 'admin'], function(){
   //Contact Page Controller
   Route::get('/unseen-msg-page', 'Backend\ContactController@index')->name('admin.message.page');
   Route::get('/seen-msg-page', 'Backend\ContactController@seenIndex')->name('admin.message.seen');
-  Route::get('/view-msg-page/{id}', 'Backend\ContactController@viewMsg')->name('admin.message.view');
-  Route::post('/view-msg-page/{id}', 'Backend\ContactController@viewUpdate')->name('admin.message.viewUpdate');
+  Route::get('/edit/{id}', 'Backend\ContactController@edit')->name('admin.message.view');
+  Route::post('/edit/{id}', 'Backend\ContactController@update')->name('admin.message.updateView');
   Route::post('/message-data-delete/{id}', 'Backend\ContactController@delete')->name('admin.message.delete');
   //Contact Page Controller
 
 
+    //Blog Page Controller
+    Route::get('/blogs', 'Backend\BlogsController@index')->name('admin.blog.list');
+    Route::get('blog/create', 'Backend\BlogsController@create')->name('admin.blog.create');
+    Route::post('blog/store', 'Backend\BlogsController@store')->name('admin.blog.store');
+    Route::get('blog/edit/{id}', 'Backend\BlogsController@edit')->name('admin.blog.edit');
+    Route::post('blog/edit/{id}', 'Backend\BlogsController@update')->name('admin.blog.update');
+    Route::post('blog/delete/{id}', 'Backend\BlogsController@delete')->name('admin.blog.delete');
+    //Blog Page Controller
+
+
 
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

@@ -76,6 +76,21 @@
 {{--                        <a class="nav-link" href="{{ route('admin.service.page') }}">Seen Message</a>--}}
 {{--                    @endif--}}
 
+
+
+                </nav>
+            </div>
+
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBlogs" aria-expanded="false" aria-controls="collapsePages">
+                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                Manage Blogs
+                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+            </a>
+            <div class="collapse" id="collapseBlogs" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                <nav class="sb-sidenav-menu-nested nav">
+                    <a class="nav-link" href="{{ route('admin.blog.create') }}">Add</a>
+                    <a class="nav-link" href="{{ route('admin.blog.list') }}">List</a>
+
                 </nav>
             </div>
 
