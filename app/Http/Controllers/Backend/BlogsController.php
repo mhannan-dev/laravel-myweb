@@ -2,14 +2,21 @@
 namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
-use Carbon\Carbon;
+use App\Models\Category;
+use App\Models\Tag;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+
+
 use Illuminate\Support\Str;
-use Intervention\Image\Facades\Image;
+use App\Http\Traits\UploadTrait;
 
 class BlogsController extends Controller
 {
+    use UploadTrait;
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,10 +24,9 @@ class BlogsController extends Controller
      */
     public function index()
     {
-        $data = Service::orderBy('id', 'desc')->get();
+        $data = Post::orderBy('id', 'desc')->get();
         //dd($data);
-        //return view('backend/pages/service/index')->with('data', $data);
-        return view('backend/pages/service/index', compact('data', 'data'))->with('no', 1);
+        return view('backend/pages/blog/index', compact('data', 'data'));
     }
 
 
@@ -29,86 +35,85 @@ class BlogsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function create()
     {
-        return view('backend/pages/blog/create');
+
+        $categories =  Category::where('type', 1)->get();
+        $tags = Tag::all();
+        return view('backend.pages.blog.create',compact('categories','tags'));
     }
+
+
+
+
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Post $post)
     {
-        $request->validate([
-            //'user_id'       => 'required|numeric',
-            'title'         => 'required|max:150',
-            'slug'          => 'slug',
-            'image'         => 'required',
-            'body'          => 'required',
-            'status'        => 'required',
 
+        $this->validate($request,[
+            'title' => 'required',
+            'category_id' => 'required',
+            'tag_id' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'body' => 'required',
+            'status' => 'required',
         ]);
-        $image = $request->file('image');
+
         $slug = Str::slug($request->title);
-        if(isset($image))
-        {
-            //make unipue name for image
-            $currentDate = Carbon::now()->toDateString();
-            $imageName  = $slug.'-'.$currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
-            if(!Storage::disk('public')->exists('post'))
-            {
-                Storage::disk('public')->makeDirectory('post');
-            }
-            //$postImage = Image::make($image)->resize(1600,1066)->save();
-            $postImage = Image::make($image)->resize(1600,1066)->save( $imageName,90);
-            Storage::disk('public')->put('post/'.$imageName,$postImage);
-        } else {
-            $imageName = "default.png";
+        if ($request->has('image')) {
+            $image = $request->file('image');
+            $imageName = time();
+            $folder = '/upload/';
+            $filePath = $folder . $imageName. '.' . $image->getClientOriginalExtension();
+            $this->uploadOne($image, $folder, 'public', $imageName);
+            $post->image = $filePath;
         }
 
         $post = new Post();
-        //$post->user_id = 1;
-        //$post->user_id = Auth::id();
         $post->title = $request->title;
         $post->slug = $slug;
-        $post->image = $imageName;
+        $post->category_id = $request->category_id;
+        $post->tag_id = $request->tag_id;
+        $post->image = $imageName.'.'.$image->getClientOriginalExtension();
         $post->body = $request->body;
         $post->status = $request->status;
         $post->save();
+        toast('Post added successfully','success');
 
-        toast('Data saved successfully !!','success');
-        return redirect()->route('admin.blog.list',compact('data_list'));
-       // return $request->all();
+        return redirect()->route('admin.blog.list');
 
-
-    }
-
-    public function delete($id)
-    {
-        $delete_row = Service::find($id);
-        //dd($delete_row);
-        if (!is_null($delete_row)) {
-            $delete_row->delete();
-        }
-
-        toast('Data has deleted successfully !!','success');
-        return back();
+        //return  $request->all();
 
     }
 
     public function edit($id)
     {
-        $data_list = Service::find($id);
+        $data_list = Post::find($id);
+
+        $categories = Category::where('type', 1)->get();
+        //$categories = Category::all();
+
+        //dd($data_list);
+        $tags =  Tag::all();
         if (!is_null($data_list)) {
 
-            return view('backend.pages.service.edit', compact('data_list'));
+            return view('backend.pages.blog.edit', compact('data_list','categories','tags'));
+
         }else {
 
-            return redirect()->route('admin.service.page');
+            return redirect()->route('admin.blog.list');
         }
     }
+
+
+
+
 
 
     public function update(Request $request, $id)
@@ -131,6 +136,19 @@ class BlogsController extends Controller
 
         toast('Data hasbeen updated successfully !!','success');
         return redirect()->route('admin.service.page',compact('data_list'));
+
+    }
+
+    public function delete($id)
+    {
+        $delete_row = Post::find($id);
+        //dd($delete_row);
+        if (!is_null($delete_row)) {
+            $delete_row->delete();
+        }
+
+        toast('Data has deleted successfully !!','success');
+        return back();
 
     }
 

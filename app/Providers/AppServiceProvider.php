@@ -25,8 +25,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $contact = Contact::all();
-        //var_dump($contact);
-        View::share(['contact' => $contact]);
+       $contact = Contact::all();
+       View::share(['contact' => $contact]);
     }
 }

@@ -11,19 +11,31 @@
                         <div class="card-body">
                             <form action="{{ route('admin.blog.store') }}" method="post" enctype="multipart/form-data">
                                 @csrf
-                                {{--@include('backend.partials.messages')--}}
+                                <div class="form-group">
+                                    <label for="status">Please select category</label>
+                                    <select class="form-control" id="category_id" name="category_id" required>
+                                    <option>Please select category</option>
+                                    @foreach($categories as $cat_row)
+                                    <option value="{{ $cat_row->id}}">{{ $cat_row->name}}</option>
+                                    @endforeach
+
+                                    </select>
+
+                                </div>
 
                                 <div class="form-group">
-                                    <label for="status">Select User</label>
-                                    <select class="form-control" id="user_id" name="user_id" required>
-                                        <option>Please select status</option>
-                                        <option value="1">Admin</option>
+                                    <label for="tag">Select Tag</label>
+                                    <select class="form-control" id="tag_id" name="tag_id" required>
+                                        <option>Please select tag</option>
+                                        @foreach($tags as $tag_row)
+                                            <option value="{{ $tag_row->id}}">{{ $tag_row->name}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="small mb-1" for="title">Title</label>
-                                    <input class="form-control py-4" id="title" name="title" type="text" placeholder="Enter title" required />
+                                    <input class="form-control py-4" id="title" name="title" type="text" placeholder="Enter title" required/>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleFormControlFile1">Attach Image</label>
@@ -36,7 +48,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="status">Status</label>
-                                    <select class="form-control" id="status" name="status" required>
+                                    <select class="form-control" id="type" name="status" required>
                                         <option>Please select status</option>
                                         <option value="1">Publish</option>
                                         <option value="0">Draft</option>

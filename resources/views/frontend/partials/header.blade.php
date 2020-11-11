@@ -22,10 +22,12 @@
                                             <li><a href="{{ route('frontend.portfolio') }}">Portfolio</a></li>
                                             <li><a href="{{ route('frontend.blog') }}">Blog</a></li>
                                             <li><a href="{{ route('frontend.contact') }}">Contact</a></li>
+                                            <li><a href="{{ route('login') }}">Admin Login</a></li>
+
                                         </ul>
                                     </nav>
                                 </div>
-                                
+
                             </div>
                         </div>
                         <!-- Mobile Menu -->

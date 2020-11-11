@@ -39,7 +39,8 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $about_data->title }}</td>
-                                <td>{{ $about_data->description }}</td>
+                                <td>{{ Str::limit($about_data->description, 200) }}</td>
+
                                 <td>
                                 @if($about_data->status == 0)
 

@@ -1,68 +1,73 @@
 @extends('backend.layout.main')
 @section('content')
-    <main>
-        <div class="container-fluid">
-            <div class="card mb-4 mt-4">
-                @include('backend.partials.messages')
-                <div class="card-header">
-                    <i class="fas fa-table mr-1"></i>
-                    Service Data
+<main>
+    <div class="container-fluid">
+        <div class="card mb-4 mt-4">
+            @include('backend.partials.messages')
+            <div class="card-header">
+                <div class="card-tools" style="float: right; margin-top: 5px;">
+                    <a class="btn btn-info btn-sm" href="{{route('admin.blog.create')}}"><i class="fa fa-plus"></i>Add</a>
+
                 </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
+                <i class="fas fa-table mr-1"></i>
+                All Posts
+
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
                             <tr>
                                 <th>SL</th>
-                                <th>Icon</th>
                                 <th>Title</th>
+                                <th>Slug</th>
                                 <th>Description</th>
+                                <th>Category</th>
+                                <th>Tag</th>
+                                <th>Image</th>
                                 <th>Status</th>
                                 <th>Action</th>
-                                <th>Start date</th>
+                                <th>Date</th>
 
                             </tr>
-                            </thead>
-                            <tfoot>
-                            <tr>
-                                <th>SL</th>
-                                <th>Icon</th>
-                                <th>Title</th>
-                                <th>Description</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                                <th>Start date</th>
-                            </tr>
-                            </tfoot>
-                            <tbody>
+                        </thead>
 
-                            @foreach ($data as $service_data)
+                        <tbody>
+
+                            @foreach ($data as $post)
 
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $service_data->icon }}</td>
-                                <td>{{ $service_data->title }}</td>
-                                <td>{{ $service_data->description }}</td>
-                                <td>
-                                @if($service_data->status == 0)
 
-                                    <span class="badge badge-warning">Draft</span>
-                                @else
-                                     <span class="badge badge-success">Published</span>
-                                @endif
+                                <td>{!! Str::limit($post->title, 30) !!}</td>
+                                <td>{!! Str::limit($post->slug, 30) !!}</td>
+                                <td>{!! Str::limit($post->body, 100) !!}</td>
+                                <td>{!! $post->categories->name !!} </td>
+                                <td>{!! $post->tags->name !!}</td>
+                                <td>
+                                    <img src="{{ asset('/storage/upload/'.$post->image) }}" alt="{{ $post->title }}" class="rounded" style="width:80px; height:80px;">
+                                </td>
+                                <td>
+                                    @if($post->status == 1)
+
+                                        <span class="badge badge-success">Published</span>
+                                        @else
+
+                                        <span class="badge badge-warning">Draft</span>
+                                        @endif
 
                                 </td>
                                 <td>
-                                    <a href="{{ route('admin.service.edit', $service_data->id) }}" class="badge badge-success">
+                                    <a href="{{ route('admin.blog.edit', $post->id) }}" class="badge badge-success">
                                         <i class="fa fa-edit" aria-hidden="true"></i>
                                     </a>
 
-                                       <a href="#deleteModal{{ $service_data->id }}" data-toggle="modal" class="badge badge-danger">
-                                           <i class="fa fa-trash" aria-hidden="true"></i>
-                                       </a>
+                                    <a href="#deleteModal{{ $post->id }}" data-toggle="modal" class="badge badge-danger">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </a>
 
                                     <!-- Delete Modal -->
-                                    <div class="modal fade" id="deleteModal{{ $service_data->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="deleteModal{{ $post->id }}">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -72,7 +77,7 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form action="{!! route('admin.service.delete', $service_data->id) !!}"  method="post">
+                                                    <form action="{!! route('admin.blog.delete', $post->id) !!}" method="post">
                                                         {{ csrf_field() }}
                                                         <button type="submit" class="btn btn-danger">Permanent Delete</button>
                                                     </form>
@@ -86,16 +91,18 @@
                                     </div>
                                     <!-- Delete Modal -->
                                 </td>
-                                <td>{{ $service_data->created_at }}</td>
+                                <td>{{ $post->created_at }}</td>
 
                             </tr>
                             @endforeach
 
-                            </tbody>
-                        </table>
-                    </div>
+                        </tbody>
+                    </table>
+
+                    
                 </div>
             </div>
         </div>
-    </main>
+    </div>
+</main>
 @endsection
